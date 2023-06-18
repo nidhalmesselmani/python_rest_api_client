@@ -19,11 +19,20 @@ def create_session():
     s.hooks["response"] = api_calls
     return s
 
+def get_book_by_userId(s,userId):
+    payload = (('userId', userId),)
+    r =  s.get("https://jsonplaceholder.typicode.com/todos", params=payload)
+    return r
+
+
 def main():
     sess = create_session()
 
-    resp = sess.get("https://jsonplaceholder.typicode.com/todos")
-
+    #resp = sess.get("https://jsonplaceholder.typicode.com/todos")
+    resp = get_book_by_userId(sess, 2)
+    print(resp.json()[0])
+    resp = get_book_by_userId(sess, 5)
+    print(resp.json()[0])
 
 
 if __name__ == '__main__':
